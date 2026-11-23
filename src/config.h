@@ -1,4 +1,9 @@
 #pragma once
+
+#ifndef FW_VERSION
+#define FW_VERSION ""
+#endif
+#define FW_VERSION_STR (FW_VERSION[0] ? FW_VERSION : "dev")
 // Compile-time defaults. Everything here except pins can be changed from the
 // web UI and is persisted in NVS. Override with -D build flags if you want.
 

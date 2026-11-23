@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solo RTK Base Installer</title>
+<script type="module" src="https://unpkg.com/esp-web-tools@10.1.0/dist/web/install-button.js?module"></script>
+<style>
+:root{--bg:#f6f7f9;--fg:#15181d;--mut:#5b6573;--card:#fff;--acc:#0b63ce}
+@media (prefers-color-scheme:dark){:root{--bg:#111418;--fg:#e6e9ee;--mut:#8a94a3;--card:#1b2027;--acc:#58a6ff}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
+main{max-width:640px;margin:0 auto;padding:32px 16px}
+h1{font-size:26px;margin:0 0 4px}.mut{color:var(--mut)}
+.card{background:var(--card);border-radius:10px;padding:20px;margin:20px 0}
+ol{padding-left:20px}li{margin:6px 0}code{font-size:14px}
+esp-web-install-button button{font:600 16px system-ui;padding:12px 22px;border:0;border-radius:8px;background:var(--acc);color:#fff;cursor:pointer}
+</style></head><body><main>
+<h1>Solo RTK Base</h1>
+<p class="mut">ESP32-C3 firmware that sends RTK corrections to a 3DR Solo over SoloLink. Version <span id="ver">…</span></p>
+
+<div class="card">
+<h2 style="margin-top:0;font-size:18px">Install</h2>
+<ol>
+<li>Use <b>Chrome or Edge</b> on a computer (Windows, Mac, Linux or ChromeOS).</li>
+<li>Plug the ESP32-C3 into a USB port with a data cable.</li>
+<li>Click <b>Install</b>, pick the port (it shows as <i>USB JTAG/serial debug unit</i>), and confirm.</li>
+</ol>
+<esp-web-install-button manifest="manifest.json">
+  <button slot="activate">Install</button>
+  <span slot="unsupported">This browser can't flash devices. Open this page in Chrome or Edge on a computer.</span>
+  <span slot="not-allowed">Open this page over https.</span>
+</esp-web-install-button>
+<p class="mut" style="font-size:14px">On a first install, let it erase the device. When updating, choose <b>not</b> to erase and your settings stay.</p>
+</div>
+
+<div class="card">
+<h2 style="margin-top:0;font-size:18px">After installing</h2>
+<ol>
+<li>Join the Wi-Fi network <code>SoloRTK-XXXX</code>, password <code>solortk1</code>.</li>
+<li>Open <code>http://192.168.4.1</code>, enter your SoloLink network name and password, and press <b>Save &amp; reboot</b>.</li>
+<li>Connect the base GPS: GPS TX → GPIO20, GPS RX → GPIO21, GND → GND, 115200 baud, RTCM3 output.</li>
+<li>Set ArduPilot <code>GPS_INJECT_TO = 127</code>.</li>
+</ol>
+<p class="mut" style="font-size:14px">If the port doesn't show up or the install fails: hold the <b>BOOT</b> button while plugging in, then try again.</p>
+</div>
+
+<p class="mut" style="font-size:14px">No Chrome? Download the Windows or Mac/Linux package from the <a id="rel" href="#">latest release</a>.</p>
+</main>
+<script>
+fetch("manifest.json").then(r=>r.json()).then(m=>{document.getElementById("ver").textContent=m.version}).catch(()=>{});
+const repo=location.pathname.split("/").filter(Boolean)[0]||"";
+document.getElementById("rel").href=`https://github.com/${location.hostname.split(".")[0]}/${repo}/releases/latest`;
+</script>
+</body></html>

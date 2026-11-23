@@ -6,7 +6,16 @@ base GPS on `Serial1`, validates it, and injects it as MAVLink2
 
 FC params: `GPS_INJECT_TO = 127`, `GPS_AUTO_CONFIG = 1`.
 
-## Build / flash
+## Install (no toolchain)
+
+- **Web installer:** open `https://jbb2068.github.io/Solo-RTK-Base-ESP32/` in Chrome or Edge, plug in the C3, click Install. Choose "don't erase" when updating to keep settings.
+- **Windows:** download `solo-rtk-base-<ver>-windows.zip` from Releases, unzip, double-click `flash.bat` (fresh) or `update-keep-settings.bat`. `esptool.exe` is bundled.
+- **macOS / Linux:** `solo-rtk-base-<ver>-mac-linux.zip`, `./flash.sh` or `./flash.sh update`.
+- **Any flasher:** `solo-rtk-base-<ver>-factory.bin` at offset `0x0`.
+
+Releases: push a tag `vX.Y.Z` and CI builds the packages and creates the GitHub release. The web installer redeploys from every push to `main`. One-time repo setup: Settings → Pages → Source: **GitHub Actions**.
+
+## Build / flash from source
 
 ```
 pio run -e esp32c3 -t upload

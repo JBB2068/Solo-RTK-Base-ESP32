@@ -55,7 +55,7 @@ async function tick(){
   const good=!r.stale&&w.connected&&m.tx>0;
   $("hdr").className="pill "+(good?"ok":r.stale?"bad":"warn");
   $("hdr").textContent=!w.connected?"Wi-Fi down":r.stale?"No RTCM":m.locked?"Injecting":"Injecting (fallback)";
-  $("up").textContent=`up ${Math.floor(s.uptime_s/3600)}h${Math.floor(s.uptime_s/60)%60}m · last reset: ${s.reset_reason} · heap ${s.heap>>10}k (min ${s.heap_min>>10}k)`;
+  $("up").textContent=`${s.version} · up ${Math.floor(s.uptime_s/3600)}h${Math.floor(s.uptime_s/60)%60}m · last reset: ${s.reset_reason} · heap ${s.heap>>10}k (min ${s.heap_min>>10}k)`;
   rows("rtcm",[["Feed",r.stale?pill("stale","bad"):pill("live","ok")],["Last frame",ago(r.last_frame_ms)],["Rate",r.bps+" B/s"],
    ["Frames OK",r.frames],["CRC errors",r.crc_err],["Header errors",r.hdr_err],["Bytes discarded",r.discarded],
    [">720 B dropped",r.oversize?pill(r.oversize,"bad"):0],["Send failures",r.send_fail]]);

@@ -60,6 +60,7 @@ void handleStatus() {
   String o;
   o.reserve(1500);
   o += '{';
+  kvStr(o, "version", FW_VERSION_STR);
   kvU(o, "uptime_s", now / 1000);
   kvU(o, "heap", ESP.getFreeHeap());
   kvU(o, "heap_min", ESP.getMinFreeHeap());

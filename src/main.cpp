@@ -47,7 +47,7 @@ static void logStatus() {
 void setup() {
   Serial.begin(115200);
   delay(300);
-  Serial.printf("\n[boot] Solo RTK base, reset reason %d\n", (int)esp_reset_reason());
+  Serial.printf("\n[boot] Solo RTK base %s, reset reason %d\n", FW_VERSION_STR, (int)esp_reset_reason());
 
   watchdogInit();
   settingsLoad(settings);
