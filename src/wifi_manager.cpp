@@ -64,7 +64,7 @@ void WifiManager::poll(uint32_t now) {
     seenGen_ = gotIp_;
     upSinceMs_ = now;
     Serial.printf("[wifi] connected to %s, IP %s, RSSI %d, ch %d\n", s_->ssid,
-                  WiFi.localIP().toString().c_str(), WiFi.RSSI(), WiFi.channel());
+                  WiFi.localIP().toString().c_str(), (int)WiFi.RSSI(), (int)WiFi.channel());
   }
   if (!staEnabled_) return;
 

@@ -124,8 +124,8 @@ void MavlinkLink::handleMessage(const void* m, IPAddress src, uint16_t srcPort, 
       lastRxMs_ = now;
       st_.lockChanges++;
       st_.vehicleSysid = msg.sysid;
-      Serial.printf("[mav] locked to vehicle sysid %u via %s:%u\n", msg.sysid,
-                    src.toString().c_str(), srcPort);
+      Serial.printf("[mav] locked to vehicle sysid %u via %s:%u\n", (unsigned)msg.sysid,
+                    src.toString().c_str(), (unsigned)srcPort);
     }
   }
 
